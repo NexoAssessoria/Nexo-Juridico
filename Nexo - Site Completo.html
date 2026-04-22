@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexo Assessoria Jurídica — Auxílio Acidente INSS</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════
+   RESET & VARIÁVEIS
+══════════════════════════════════════════════════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#c9a84c; --gold-lt:#e0c47a; --gold-dim:rgba(201,168,76,.15);
+  --navy:#3d4469; --dark:#0d1828; --dark2:#111f33; --dark3:#080f1a;
+  --white:#fff; --gray:#94a3b8; --light:#f0ece0;
+  --green:#25d366;
+  --r:2px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',sans-serif;background:var(--dark3);color:var(--white);overflow-x:hidden}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+input,textarea,select{font-family:inherit}
+
+/* ══════════════════════════════════════════════════════════
+   UTILITÁRIOS
+══════════════════════════════════════════════════════════ */
+.container{max-width:1120px;margin:0 auto;padding:0 40px}
+.serif{font-family:'Playfair Display',serif}
+.gold{color:var(--gold)}
+.section-tag{display:inline-flex;align-items:center;gap:10px;margin-bottom:14px}
+.section-tag-line{width:28px;height:1.5px;background:var(--gold)}
+.section-tag span{font-size:9px;font-weight:700;letter-spacing:3.5px;color:var(--gold);text-transform:uppercase}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,44px);font-weight:700;line-height:1.2;margin-bottom:12px}
+.section-sub{font-size:13px;color:var(--gray);line-height:1.8;max-width:560px}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.2),transparent)}
+
+/* ══════════════════════════════════════════════════════════
+   NAVBAR
+══════════════════════════════════════════════════════════ */
+#navbar{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  transition:.3s;padding:22px 0;
+}
+#navbar.scrolled{
+  background:rgba(8,15,26,.97);
+  backdrop-filter:blur(12px);
+  padding:14px 0;
+  border-bottom:1px solid rgba(201,168,76,.12);
+  box-shadow:0 4px 32px rgba(0,0,0,.4);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:14px}
+.nav-logo svg{width:38px;height:38px;flex-shrink:0}
+.logo-nexo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;letter-spacing:2px}
+.logo-sub{font-size:8px;font-weight:600;letter-spacing:4px;color:var(--gold);display:block;margin-top:2px;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.75);transition:.2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{
+  background:transparent;border:1.5px solid var(--gold);
+  color:var(--gold) !important;padding:10px 24px;border-radius:var(--r);
+  transition:.25s !important;
+}
+.nav-cta:hover{background:var(--gold);color:var(--dark) !important}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-hamburger span{width:22px;height:2px;background:var(--white);border-radius:1px;transition:.3s}
+
+/* ══════════════════════════════════════════════════════════
+   HERO
+══════════════════════════════════════════════════════════ */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#04090f 0%,var(--dark) 50%,#111f33 100%);
+}
+.hero-glow{
+  position:absolute;right:-100px;top:50%;transform:translateY(-50%);
+  width:600px;height:600px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(201,168,76,.07) 0%,transparent 65%);
+}
+.hero-grid{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle,rgba(201,168,76,.09) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+.hero-ring{
+  position:absolute;right:-80px;top:50%;transform:translateY(-50%);
+  width:500px;height:500px;border-radius:50%;
+  border:1px solid rgba(201,168,76,.1);pointer-events:none;
+}
+.hero-ring::before{content:'';position:absolute;inset:44px;border-radius:50%;border:1px solid rgba(201,168,76,.07)}
+.hero-ring::after{content:'';position:absolute;inset:90px;border-radius:50%;border:1px solid rgba(201,168,76,.05)}
+.hero-content{position:relative;z-index:2;padding-top:80px;max-width:720px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);
+  padding:7px 18px;border-radius:20px;margin-bottom:32px;
+}
+.hero-badge-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-badge span{font-size:10px;font-weight:600;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(40px,5.5vw,72px);font-weight:700;line-height:1.1;margin-bottom:10px}
+.hero-title .accent{color:var(--gold)}
+.hero-title .italic{font-style:italic;font-weight:400;font-size:.88em;display:block;margin-top:6px}
+.hero-border{border-left:2px solid var(--gold);padding-left:20px;margin:28px 0 40px}
+.hero-border p{font-size:13px;color:var(--gray);line-height:1.9}
+.hero-border strong{color:var(--white)}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--gold);color:var(--dark);
+  font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  padding:16px 34px;border-radius:var(--r);
+  transition:.3s;box-shadow:0 8px 32px rgba(201,168,76,.3);
+  border:none;cursor:pointer;
+}
+.btn-primary:hover{background:var(--gold-lt);transform:translateY(-2px);box-shadow:0 12px 40px rgba(201,168,76,.4)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);
+  font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;
+  padding:16px 30px;border-radius:var(--r);transition:.3s;cursor:pointer;
+  background:transparent;
+}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.hero-scroll{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;z-index:2;
+}
+.hero-scroll span{font-size:9px;letter-spacing:3px;color:rgba(255,255,255,.3);text-transform:uppercase}
+.scroll-line{width:1px;height:44px;background:linear-gradient(180deg,rgba(201,168,76,.6),transparent);animation:scrollAnim 2s ease-in-out infinite}
+@keyframes scrollAnim{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ══════════════════════════════════════════════════════════
+   STATS BAR
+══════════════════════════════════════════════════════════ */
+.stats{
+  background:linear-gradient(90deg,rgba(201,168,76,.07),rgba(201,168,76,.03),rgba(201,168,76,.07));
+  border-top:1px solid rgba(201,168,76,.18);
+  border-bottom:1px solid rgba(201,168,76,.1);
+  padding:32px 0;
+}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.stat{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 24px;border-right:1px solid rgba(201,168,76,.12)}
+.stat:last-child{border-right:none}
+.stat-num{font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:var(--gold);line-height:1}
+.stat-label{font-size:10px;font-weight:500;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-top:8px}
+
+/* ══════════════════════════════════════════════════════════
+   SERVIÇOS
+══════════════════════════════════════════════════════════ */
+.services{padding:100px 0;background:var(--dark)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px}
+.service-card{
+  background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.08);
+  padding:44px 32px;position:relative;overflow:hidden;transition:.3s;
+}
+.service-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  transform:scaleX(0);transition:.3s;transform-origin:center;
+}
+.service-card:hover{background:rgba(201,168,76,.04);border-color:rgba(201,168,76,.25)}
+.service-card:hover::after{transform:scaleX(1)}
+.service-card.featured{
+  background:rgba(201,168,76,.06);border-color:rgba(201,168,76,.3);
+  grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;
+  align-items:start;
+}
+.service-card.featured::after{transform:scaleX(1)}
+.svc-num{position:absolute;top:16px;right:20px;font-family:'Playfair Display',serif;font-size:56px;font-weight:700;color:rgba(201,168,76,.08);line-height:1}
+.svc-icon{margin-bottom:20px}
+.svc-icon svg{width:36px;height:36px}
+.svc-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;margin-bottom:10px}
+.svc-desc{font-size:12px;color:var(--gray);line-height:1.8}
+.svc-badge{
+  display:inline-block;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  background:rgba(201,168,76,.12);color:var(--gold);border:1px solid rgba(201,168,76,.25);
+  padding:4px 12px;border-radius:10px;margin-bottom:16px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   COMO FUNCIONA
+══════════════════════════════════════════════════════════ */
+.how{padding:100px 0;background:var(--dark3)}
+.how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:60px;position:relative}
+.how-steps::before{
+  content:'';position:absolute;top:40px;left:calc(100%/6);right:calc(100%/6);
+  height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3) 20%,rgba(201,168,76,.3) 80%,transparent);
+  z-index:0;
+}
+.how-step{text-align:center;padding:0 32px;position:relative;z-index:1}
+.how-num{
+  width:80px;height:80px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(201,168,76,.12),rgba(201,168,76,.04));
+  border:1px solid rgba(201,168,76,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--gold);
+  margin:0 auto 24px;position:relative;
+  box-shadow:0 0 32px rgba(201,168,76,.1);
+}
+.how-step-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:10px}
+.how-step-desc{font-size:12px;color:var(--gray);line-height:1.8}
+.how-note{
+  margin-top:48px;
+  background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);
+  border-radius:8px;padding:20px 28px;
+  display:flex;align-items:center;gap:16px;
+  font-size:13px;color:var(--gray);
+}
+.how-note strong{color:var(--gold)}
+
+/* ══════════════════════════════════════════════════════════
+   CASOS DE SUCESSO
+══════════════════════════════════════════════════════════ */
+.cases{padding:100px 0;background:var(--dark)}
+.cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.case-card{
+  background:linear-gradient(145deg,rgba(61,68,105,.12),rgba(13,24,40,.5));
+  border:1px solid rgba(201,168,76,.12);border-radius:4px;
+  padding:36px;position:relative;overflow:hidden;transition:.3s;
+}
+.case-card:hover{border-color:rgba(201,168,76,.3);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.3)}
+.case-quote{
+  position:absolute;top:12px;right:20px;
+  font-family:'Playfair Display',serif;font-size:96px;font-weight:700;
+  color:rgba(201,168,76,.07);line-height:1;user-select:none;
+}
+.case-stars{color:var(--gold);font-size:13px;letter-spacing:3px;margin-bottom:12px}
+.case-amount{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--gold);line-height:1}
+.case-type{font-size:9px;font-weight:700;letter-spacing:2.5px;color:var(--gray);text-transform:uppercase;margin:6px 0 20px}
+.case-text{font-size:12px;color:rgba(255,255,255,.7);line-height:1.8;font-style:italic;margin-bottom:24px}
+.case-client{display:flex;align-items:center;gap:12px}
+.case-avatar{
+  width:44px;height:44px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--navy),rgba(201,168,76,.5));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-size:18px;font-weight:700;
+}
+.case-name{font-size:13px;font-weight:600}
+.case-role{font-size:11px;color:var(--gray);margin-top:2px}
+
+/* ══════════════════════════════════════════════════════════
+   FORMULÁRIO / QUIZ
+══════════════════════════════════════════════════════════ */
+.quiz-section{
+  padding:100px 0;
+  background:linear-gradient(135deg,rgba(61,68,105,.12) 0%,var(--dark3) 60%);
+  position:relative;overflow:hidden;
+}
+.quiz-section::before{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,.05) 0%,transparent 65%);
+  pointer-events:none;
+}
+.quiz-wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.quiz-left{}
+.quiz-left .section-sub{margin-bottom:28px}
+.quiz-features{list-style:none;margin-top:32px;display:flex;flex-direction:column;gap:14px}
+.quiz-features li{display:flex;align-items:flex-start;gap:12px;font-size:13px;color:var(--gray)}
+.quiz-features li .feat-icon{width:24px;height:24px;border-radius:50%;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;margin-top:1px}
+.quiz-features li strong{color:var(--white)}
+
+.quiz-form{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(201,168,76,.15);
+  border-radius:8px;padding:40px;
+  position:relative;
+}
+.quiz-form::before{
+  content:'';position:absolute;top:0;left:20px;right:20px;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  border-radius:1px;
+}
+.quiz-form-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:6px}
+.quiz-form-sub{font-size:11px;color:var(--gray);margin-bottom:28px}
+
+/* Inputs */
+.field{margin-bottom:18px}
+.field label{display:block;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.field input{
+  width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--r);padding:13px 16px;color:var(--white);font-size:13px;
+  transition:.2s;outline:none;
+}
+.field input:focus{border-color:rgba(201,168,76,.5);background:rgba(201,168,76,.05)}
+.field input::placeholder{color:rgba(148,163,184,.4)}
+
+/* Checkboxes */
+.checks-title{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin:24px 0 14px}
+.check-group{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
+.check-item{
+  display:flex;align-items:flex-start;gap:12px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
+  border-radius:6px;padding:12px 14px;cursor:pointer;transition:.2s;
+}
+.check-item:hover{background:rgba(201,168,76,.05);border-color:rgba(201,168,76,.2)}
+.check-item input[type=checkbox]{display:none}
+.check-box-custom{
+  width:20px;height:20px;border-radius:4px;border:1.5px solid rgba(255,255,255,.2);
+  background:transparent;flex-shrink:0;margin-top:1px;transition:.2s;
+  display:flex;align-items:center;justify-content:center;font-size:11px;
+}
+.check-item.checked .check-box-custom{background:var(--gold);border-color:var(--gold);color:var(--dark)}
+.check-item.checked{background:rgba(201,168,76,.07);border-color:rgba(201,168,76,.25)}
+.check-label{font-size:12px;color:rgba(255,255,255,.85);line-height:1.5}
+.check-label strong{display:block;font-size:13px;font-weight:600;color:var(--white);margin-bottom:2px}
+
+/* Resultado */
+.quiz-result{display:none;text-align:center;padding:8px 0}
+.result-approved{
+  background:linear-gradient(135deg,rgba(45,138,110,.15),rgba(45,138,110,.05));
+  border:1px solid rgba(45,138,110,.3);border-radius:8px;
+  padding:24px;margin-bottom:20px;
+}
+.result-icon{font-size:40px;margin-bottom:10px}
+.result-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#6ddabc;margin-bottom:8px}
+.result-text{font-size:12px;color:var(--gray);line-height:1.7}
+.btn-wa{
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  background:linear-gradient(135deg,#25d366,#1aaf55);color:var(--white);
+  font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  padding:17px 36px;border-radius:var(--r);border:none;cursor:pointer;
+  width:100%;transition:.3s;box-shadow:0 8px 32px rgba(37,211,102,.3);
+  margin-top:8px;
+}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(37,211,102,.4)}
+.btn-wa svg{width:20px;height:20px;flex-shrink:0}
+.quiz-disclaimer{font-size:10px;color:rgba(148,163,184,.5);text-align:center;margin-top:14px;line-height:1.6}
+
+/* ══════════════════════════════════════════════════════════
+   FAQ
+══════════════════════════════════════════════════════════ */
+.faq{padding:100px 0;background:var(--dark)}
+.faq-grid{max-width:780px;margin:48px auto 0;display:flex;flex-direction:column;gap:12px}
+.faq-item{border:1px solid rgba(255,255,255,.07);border-radius:6px;overflow:hidden;transition:.2s}
+.faq-item.open{border-color:rgba(201,168,76,.2)}
+.faq-question{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px;cursor:pointer;
+  font-size:13px;font-weight:600;line-height:1.5;
+  transition:.2s;
+}
+.faq-item.open .faq-question{color:var(--gold)}
+.faq-chevron{width:24px;height:24px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;transition:.3s}
+.faq-item.open .faq-chevron{transform:rotate(45deg);border-color:var(--gold);color:var(--gold)}
+.faq-answer{display:none;padding:0 24px 20px;font-size:12px;color:var(--gray);line-height:1.8}
+.faq-item.open .faq-answer{display:block}
+
+/* ══════════════════════════════════════════════════════════
+   CTA BANNER
+══════════════════════════════════════════════════════════ */
+.cta-banner{
+  padding:80px 0;
+  background:linear-gradient(135deg,rgba(61,68,105,.2),rgba(201,168,76,.06),rgba(13,24,40,.8));
+  text-align:center;position:relative;overflow:hidden;
+}
+.cta-banner::before{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 65%);
+  pointer-events:none;
+}
+.cta-banner .section-title{font-size:clamp(28px,3.5vw,48px)}
+.cta-banner .section-title em{color:var(--gold);font-style:italic}
+.cta-banner p{font-size:13px;color:var(--gray);max-width:440px;margin:16px auto 40px;line-height:1.8}
+.cta-actions{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.tagline-final{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:16px;color:rgba(201,168,76,.5);
+  margin-top:48px;letter-spacing:1px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════════════════ */
+footer{
+  background:var(--dark3);border-top:1px solid rgba(201,168,76,.1);
+  padding:56px 0 28px;
+}
+.footer-top{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:48px;margin-bottom:40px}
+.footer-brand .brand-tagline{font-size:12px;color:var(--gray);line-height:1.8;margin-top:14px;max-width:280px}
+.footer-col h4{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.footer-col a{display:block;font-size:12px;color:var(--gray);margin-bottom:10px;transition:.2s}
+.footer-col a:hover{color:var(--white)}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.05);padding-top:24px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+}
+.footer-bottom p{font-size:11px;color:rgba(148,163,184,.4)}
+.footer-tagline{font-family:'Playfair Display',serif;font-style:italic;color:rgba(201,168,76,.5);font-size:12px}
+
+/* ══════════════════════════════════════════════════════════
+   BOTÃO WHATSAPP FLUTUANTE
+══════════════════════════════════════════════════════════ */
+.wa-btn{
+  position:fixed;bottom:32px;right:32px;z-index:800;
+  width:62px;height:62px;border-radius:50%;
+  background:linear-gradient(135deg,#25d366,#128c7e);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 28px rgba(37,211,102,.45);
+  cursor:pointer;transition:.3s;animation:floatWA 3.5s ease-in-out infinite;
+  border:none;
+}
+.wa-btn:hover{transform:scale(1.1)!important;box-shadow:0 12px 40px rgba(37,211,102,.6)}
+.wa-btn svg{width:32px;height:32px}
+.wa-pulse{
+  position:absolute;inset:-6px;border-radius:50%;
+  border:2px solid rgba(37,211,102,.35);animation:waPulse 2s ease-out infinite;
+}
+@keyframes floatWA{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes waPulse{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.4)}}
+
+/* ══════════════════════════════════════════════════════════
+   REVEAL ANIMATION
+══════════════════════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════════════ */
+@media(max-width:900px){
+  .container{padding:0 24px}
+  .nav-links{display:none}
+  .nav-hamburger{display:flex}
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+  .stat{border-right:none;border-bottom:1px solid rgba(201,168,76,.1);padding:16px}
+  .stat:nth-child(2n){border-right:none}
+  .stat:nth-child(3),.stat:nth-child(4){border-bottom:none}
+  .services-grid{grid-template-columns:1fr}
+  .service-card.featured{grid-column:1;grid-template-columns:1fr}
+  .how-steps{grid-template-columns:1fr;gap:40px}
+  .how-steps::before{display:none}
+  .cases-grid{grid-template-columns:1fr}
+  .quiz-wrap{grid-template-columns:1fr;gap:40px}
+  .footer-top{grid-template-columns:1fr;gap:32px}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .hero-ring,.hero-glow{display:none}
+  .cta-actions{flex-direction:column;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a class="nav-logo" href="#">
+      <svg viewBox="0 0 48 48" fill="none">
+        <defs>
+          <clipPath id="nt"><rect x="0" y="0" width="48" height="24"/></clipPath>
+          <clipPath id="nb"><rect x="0" y="24" width="48" height="24"/></clipPath>
+        </defs>
+        <polygon points="24,4 41,14 41,34 24,44 7,34 7,14" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linejoin="round"/>
+        <ellipse cx="17" cy="24" rx="9" ry="5" fill="none" stroke="#c9a84c" stroke-width="1.9" clip-path="url(#nb)"/>
+        <ellipse cx="31" cy="24" rx="9" ry="5" fill="none" stroke="#c9a84c" stroke-width="1.9"/>
+        <ellipse cx="17" cy="24" rx="9" ry="5" fill="none" stroke="#c9a84c" stroke-width="1.9" clip-path="url(#nt)"/>
+      </svg>
+      <div>
+        <span class="logo-nexo">NEXO</span>
+        <span class="logo-sub">Assessoria Jurídica</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#servicos">Serviços</a>
+      <a href="#casos">Casos de Sucesso</a>
+      <a href="#como">Como Funciona</a>
+      <a href="#faq">Dúvidas</a>
+      <a href="#quiz" class="nav-cta">Verificar meu Direito</a>
+    </div>
+    <div class="nav-hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-ring"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        <span>Especialistas em Auxílio Acidente INSS</span>
+      </div>
+      <h1 class="hero-title">
+        Seu dinheiro está<br>
+        <span class="accent">esperando por você.</span>
+        <span class="italic">Nós vamos buscá-lo.</span>
+      </h1>
+      <div class="hero-border">
+        <p>Milhares de trabalhadores CLT têm direito ao <strong>Auxílio Acidente do INSS</strong> e perdem esse dinheiro por falta de informação. Já recuperamos mais de <strong>R$ 4,2 milhões</strong> para nossos clientes.</p>
+      </div>
+      <div class="hero-actions">
+        <a href="#quiz" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.554 4.118 1.528 5.845L0 24l6.335-1.524A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.977 0-3.818-.543-5.388-1.485l-.386-.229-4 .962.979-3.897-.252-.4A9.797 9.797 0 012.182 12C2.182 6.579 6.579 2.182 12 2.182c5.421 0 9.818 4.397 9.818 9.818 0 5.421-4.397 9.818-9.818 9.818z"/></svg>
+          Verificar meu Direito Grátis
+        </a>
+        <a href="#casos" class="btn-ghost">Ver casos de sucesso →</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Rolar</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     STATS
+══════════════════════════════════════════════════════ -->
+<div class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat reveal">
+        <div class="stat-num">1.200<span style="font-size:24px">+</span></div>
+        <div class="stat-label">Clientes atendidos</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-num">R$4,2<span style="font-size:24px">M</span></div>
+        <div class="stat-label">Recuperados no INSS</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-num">98<span style="font-size:24px">%</span></div>
+        <div class="stat-label">Taxa de aprovação</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-num">72<span style="font-size:24px">h</span></div>
+        <div class="stat-label">Retorno garantido</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SERVIÇOS
+══════════════════════════════════════════════════════ -->
+<section class="services" id="servicos">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag"><div class="section-tag-line"></div><span>O que atendemos</span></div>
+      <h2 class="section-title">Especialistas em recuperar<br>o que é seu por direito</h2>
+      <p class="section-sub">Atuamos em todas as frentes do Direito Previdenciário. Nossa missão é garantir que você receba cada real a que tem direito.</p>
+    </div>
+
+    <div class="services-grid">
+      <!-- Card Destaque -->
+      <div class="service-card featured reveal">
+        <div>
+          <div class="svc-badge">Principal especialidade</div>
+          <div class="svc-icon">
+            <svg viewBox="0 0 36 36" fill="none" stroke="#c9a84c" stroke-width="1.4">
+              <rect x="5" y="9" width="26" height="20" rx="2"/>
+              <path d="M13 9V7a5 5 0 0110 0v2"/>
+              <circle cx="18" cy="19" r="3"/><path d="M18 22v3"/>
+            </svg>
+          </div>
+          <div class="svc-title">Auxílio Acidente INSS</div>
+          <p class="svc-desc">Trabalhador CLT que sofreu acidente e ficou com sequela permanente — mesmo que mínima — tem direito ao Auxílio Acidente. É um benefício vitalício pago pelo INSS todo mês.</p>
+        </div>
+        <div>
+          <div style="margin-top:8px;font-size:11px;color:var(--gray);line-height:1.8">
+            <div style="font-weight:700;color:var(--white);margin-bottom:8px;font-size:12px">Quem tem direito:</div>
+            Trabalhadores com carteira assinada (CLT) que sofreram acidentes de trabalho, acidentes de trajeto, ou doenças profissionais e ficaram com sequela permanente.
+          </div>
+        </div>
+        <div>
+          <div style="margin-top:8px;font-size:11px;color:var(--gray);line-height:1.8">
+            <div style="font-weight:700;color:var(--white);margin-bottom:8px;font-size:12px">Como funciona:</div>
+            Análise gratuita do caso → comprovação da sequela → protocolo no INSS → acompanhamento até aprovação. Você só paga honorários se ganhar.
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="service-card reveal">
+        <div class="svc-num">02</div>
+        <div class="svc-icon">
+          <svg viewBox="0 0 36 36" fill="none" stroke="#c9a84c" stroke-width="1.4">
+            <circle cx="18" cy="18" r="12"/><path d="M18 10v8l5 3"/>
+          </svg>
+        </div>
+        <div class="svc-title">Aposentadoria por Invalidez</div>
+        <p class="svc-desc">Incapacidade total e permanente para o trabalho? Garantimos sua aposentadoria integral junto ao INSS com processo simplificado.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="service-card reveal">
+        <div class="svc-num">03</div>
+        <div class="svc-icon">
+          <svg viewBox="0 0 36 36" fill="none" stroke="#c9a84c" stroke-width="1.4">
+            <path d="M18 4l3 6.5 7 1-5 5 1.2 7L18 20l-6.2 3.5L13 16.5l-5-5 7-1z"/>
+          </svg>
+        </div>
+        <div class="svc-title">Auxílio Doença INSS</div>
+        <p class="svc-desc">Afastamento por doença ou lesão sem burocracias. Cuidamos de todo o processo para você receber o benefício que merece.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="service-card reveal">
+        <div class="svc-num">04</div>
+        <div class="svc-icon">
+          <svg viewBox="0 0 36 36" fill="none" stroke="#c9a84c" stroke-width="1.4">
+            <rect x="5" y="5" width="26" height="26" rx="2"/>
+            <path d="M11 18h14M11 13h14M11 23h8"/>
+          </svg>
+        </div>
+        <div class="svc-title">Revisão de Benefício</div>
+        <p class="svc-desc">Benefício concedido com valor incorreto? Revisamos e buscamos a diferença retroativa que o INSS deixou de pagar.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="service-card reveal">
+        <div class="svc-num">05</div>
+        <div class="svc-icon">
+          <svg viewBox="0 0 36 36" fill="none" stroke="#c9a84c" stroke-width="1.4">
+            <circle cx="18" cy="14" r="6"/>
+            <path d="M6 30c0-6.627 5.373-12 12-12s12 5.373 12 12"/>
+          </svg>
+        </div>
+        <div class="svc-title">BPC / LOAS</div>
+        <p class="svc-desc">Benefício de Prestação Continuada para idosos e pessoas com deficiência de baixa renda. Análise de elegibilidade gratuita.</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="service-card reveal">
+        <div class="svc-num">06</div>
+        <div class="svc-icon">
+          <svg viewBox="0 0 36 36" fill="none" stroke="#c9a84c" stroke-width="1.4">
+            <path d="M18 4L6 10v10c0 7.18 5.16 13.88 12 16 6.84-2.12 12-8.82 12-16V10L18 4z"/>
+          </svg>
+        </div>
+        <div class="svc-title">Pensão por Morte</div>
+        <p class="svc-desc">Familiares de segurados do INSS têm direito à pensão. Assessoramos dependentes em todo o processo de concessão.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     COMO FUNCIONA
+══════════════════════════════════════════════════════ -->
+<section class="how" id="como">
+  <div class="container">
+    <div style="text-align:center" class="reveal">
+      <div class="section-tag" style="justify-content:center"><div class="section-tag-line"></div><span>Processo simples</span><div class="section-tag-line"></div></div>
+      <h2 class="section-title">Três passos para receber<br>o que é seu</h2>
+    </div>
+    <div class="how-steps">
+      <div class="how-step reveal">
+        <div class="how-num">1</div>
+        <div class="how-step-title">Análise Gratuita</div>
+        <p class="how-step-desc">Responda algumas perguntas rápidas. Verificamos se você tem direito ao benefício sem nenhum custo ou compromisso.</p>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-num">2</div>
+        <div class="how-step-title">Documentação</div>
+        <p class="how-step-desc">Nossa equipe orienta e reúne todos os documentos necessários. Cuidamos de toda a burocracia por você.</p>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-num">3</div>
+        <div class="how-step-title">Aprovação e Pagamento</div>
+        <p class="how-step-desc">Acompanhamos o processo até a aprovação. Você recebe o benefício e os valores retroativos. Só então cobramos nossos honorários.</p>
+      </div>
+    </div>
+    <div class="how-note reveal">
+      <span style="font-size:22px;flex-shrink:0">💼</span>
+      <p><strong>Zero risco para você.</strong> Honorários apenas no sucesso — se não ganhar, não paga nada. Análise gratuita e sem compromisso em até 72 horas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CASOS DE SUCESSO
+══════════════════════════════════════════════════════ -->
+<section class="cases" id="casos">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag"><div class="section-tag-line"></div><span>Prova social</span></div>
+      <h2 class="section-title">Resultados reais de<br>clientes reais</h2>
+      <p class="section-sub">Cada caso é uma vida transformada. Veja o que nossos clientes conquistaram com a Nexo.</p>
+    </div>
+    <div class="cases-grid">
+
+      <div class="case-card reveal">
+        <div class="case-quote">"</div>
+        <div class="case-stars">★★★★★</div>
+        <div class="case-amount">R$ 88.000,00</div>
+        <div class="case-type">Auxílio Acidente · Guarulhos/SP</div>
+        <p class="case-text">"Sofri um acidente na fábrica e não sabia que tinha direito a nada. A Nexo encontrou meu processo e em poucos meses recebi tudo de uma vez. Mudou minha vida."</p>
+        <div class="case-client">
+          <div class="case-avatar">M</div>
+          <div>
+            <div class="case-name">Marcos R.</div>
+            <div class="case-role">Operador de Máquinas · CLT</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-card reveal">
+        <div class="case-quote">"</div>
+        <div class="case-stars">★★★★★</div>
+        <div class="case-amount">R$ 79.000,00</div>
+        <div class="case-type">Auxílio Acidente · Santo André/SP</div>
+        <p class="case-text">"Fiquei com sequela no joelho e achei que não tinha direito a nada. A Nexo me surpreendeu — recebi o dinheiro e pude reformar minha casa."</p>
+        <div class="case-client">
+          <div class="case-avatar">L</div>
+          <div>
+            <div class="case-name">Lucas F.</div>
+            <div class="case-role">Auxiliar de Logística · CLT</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-card reveal">
+        <div class="case-quote">"</div>
+        <div class="case-stars">★★★★★</div>
+        <div class="case-amount">R$ 64.000,00</div>
+        <div class="case-type">Auxílio Acidente · Osasco/SP</div>
+        <p class="case-text">"Com o valor conseguimos terminar a obra de casa. A Nexo foi transparente em tudo e nunca nos deixou sem resposta. Recomendo de olhos fechados!"</p>
+        <div class="case-client">
+          <div class="case-avatar">A</div>
+          <div>
+            <div class="case-name">Ana &amp; Roberto S.</div>
+            <div class="case-role">Família atendida · CLT</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     FORMULÁRIO / QUIZ
+══════════════════════════════════════════════════════ -->
+<section class="quiz-section" id="quiz">
+  <div class="container">
+    <div class="quiz-wrap">
+
+      <!-- Lado Esquerdo -->
+      <div>
+        <div class="reveal">
+          <div class="section-tag"><div class="section-tag-line"></div><span>Verificação gratuita</span></div>
+          <h2 class="section-title">Descubra agora se você<br>tem direito ao benefício</h2>
+          <p class="section-sub">Responda as perguntas ao lado e envie suas informações. Nosso especialista entra em contato em até 72 horas com um diagnóstico completo do seu caso.</p>
+        </div>
+        <ul class="quiz-features reveal">
+          <li><div class="feat-icon">✓</div><div><strong>100% gratuito</strong> — nenhum custo para a análise</div></li>
+          <li><div class="feat-icon">🔒</div><div><strong>Dados protegidos</strong> — suas informações são confidenciais</div></li>
+          <li><div class="feat-icon">⚡</div><div><strong>Resposta rápida</strong> — retorno em até 72 horas</div></li>
+          <li><div class="feat-icon">💼</div><div><strong>Sem risco</strong> — honorários só se ganhar o processo</div></li>
+        </ul>
+      </div>
+
+      <!-- Formulário -->
+      <div class="quiz-form reveal" id="quiz-form-wrap">
+
+        <div id="quiz-fields">
+          <div class="quiz-form-title">Verificar meu Direito</div>
+          <p class="quiz-form-sub">Preencha os campos e marque as opções que se aplicam ao seu caso.</p>
+
+          <div class="field">
+            <label>Seu nome completo</label>
+            <input type="text" id="input-nome" placeholder="Ex: João da Silva" autocomplete="name">
+          </div>
+          <div class="field">
+            <label>Seu WhatsApp</label>
+            <input type="tel" id="input-tel" placeholder="(11) 99999-9999" autocomplete="tel">
+          </div>
+
+          <div class="checks-title">Marque o que se aplica ao seu caso:</div>
+          <div class="check-group">
+
+            <div class="check-item" id="c1" onclick="toggleCheck('c1')">
+              <div class="check-box-custom" id="cb-c1"></div>
+              <div class="check-label">
+                <strong>Trabalhei com carteira assinada (CLT)</strong>
+                Tive vínculo empregatício formal durante o período do acidente
+              </div>
+            </div>
+
+            <div class="check-item" id="c2" onclick="toggleCheck('c2')">
+              <div class="check-box-custom" id="cb-c2"></div>
+              <div class="check-label">
+                <strong>Sofri acidente de trabalho ou de trajeto</strong>
+                Acidente dentro da empresa, a caminho ou voltando do trabalho
+              </div>
+            </div>
+
+            <div class="check-item" id="c3" onclick="toggleCheck('c3')">
+              <div class="check-box-custom" id="cb-c3"></div>
+              <div class="check-label">
+                <strong>Fiquei com alguma sequela permanente</strong>
+                Mesmo que pequena — limitação de movimento, cicatriz funcional ou perda parcial
+              </div>
+            </div>
+
+            <div class="check-item" id="c4" onclick="toggleCheck('c4')">
+              <div class="check-box-custom" id="cb-c4"></div>
+              <div class="check-label">
+                <strong>Nunca requeri o Auxílio Acidente</strong>
+                Não sabia que tinha direito ou tentei e fui negado
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ── PERGUNTAS DE QUALIFICAÇÃO ─────────────────────── -->
+          <div class="checks-title" style="margin-top:28px">Conte um pouco mais sobre o seu caso:</div>
+
+          <div class="field">
+            <label>Em que parte do corpo foi o acidente?</label>
+            <select id="input-parte" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:2px;padding:13px 16px;color:var(--white);font-size:13px;outline:none;transition:.2s;appearance:none;cursor:pointer" onfocus="this.style.borderColor='rgba(201,168,76,.5)'" onblur="this.style.borderColor='rgba(255,255,255,.1)'">
+              <option value="" style="background:#0d1828;color:#94a3b8">Selecione uma opção...</option>
+              <option value="Coluna / costas" style="background:#0d1828">Coluna / costas</option>
+              <option value="Joelho / perna" style="background:#0d1828">Joelho / perna</option>
+              <option value="Ombro / braço" style="background:#0d1828">Ombro / braço</option>
+              <option value="Mão / punho / dedo" style="background:#0d1828">Mão / punho / dedo</option>
+              <option value="Pé / tornozelo" style="background:#0d1828">Pé / tornozelo</option>
+              <option value="Cabeça / pescoço" style="background:#0d1828">Cabeça / pescoço</option>
+              <option value="Tórax / costelas" style="background:#0d1828">Tórax / costelas</option>
+              <option value="Outro / múltiplos" style="background:#0d1828">Outro / múltiplos</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Qual era sua função na empresa?</label>
+            <input type="text" id="input-funcao" placeholder="Ex: Operador de máquinas, motorista, auxiliar...">
+          </div>
+
+          <div class="field">
+            <label>O acidente tem algum registro?</label>
+            <div class="check-group" style="margin-top:4px">
+              <div class="check-item" id="r1" onclick="toggleCheck('r1')">
+                <div class="check-box-custom" id="cb-r1"></div>
+                <div class="check-label"><strong>CAT</strong> — Comunicado de Acidente de Trabalho</div>
+              </div>
+              <div class="check-item" id="r2" onclick="toggleCheck('r2')">
+                <div class="check-box-custom" id="cb-r2"></div>
+                <div class="check-label"><strong>Atestado médico</strong> ou prontuário hospitalar</div>
+              </div>
+              <div class="check-item" id="r3" onclick="toggleCheck('r3')">
+                <div class="check-box-custom" id="cb-r3"></div>
+                <div class="check-label"><strong>Boletim de Ocorrência</strong> (BO)</div>
+              </div>
+              <div class="check-item" id="r4" onclick="toggleCheck('r4')">
+                <div class="check-box-custom" id="cb-r4"></div>
+                <div class="check-label"><strong>Não tenho nenhum registro</strong> — não sei o que preciso</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:24px">
+            <button class="btn-primary" onclick="handleSubmit()" style="width:100%;justify-content:center">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.554 4.118 1.528 5.845L0 24l6.335-1.524A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.977 0-3.818-.543-5.388-1.485l-.386-.229-4 .962.979-3.897-.252-.4A9.797 9.797 0 012.182 12C2.182 6.579 6.579 2.182 12 2.182c5.421 0 9.818 4.397 9.818 9.818 0 5.421-4.397 9.818-9.818 9.818z"/></svg>
+              Enviar para WhatsApp
+            </button>
+          </div>
+          <p class="quiz-disclaimer">Ao enviar você concorda em receber contato de nossa equipe via WhatsApp. Suas informações são confidenciais e não serão compartilhadas.</p>
+        </div>
+
+        <!-- Resultado Aprovado -->
+        <div class="quiz-result" id="quiz-result">
+          <div class="result-approved">
+            <div class="result-icon">✅</div>
+            <div class="result-title">Você pode ter direito!</div>
+            <p class="result-text">Com base nas suas respostas, você tem <strong>alto potencial</strong> de ser elegível ao Auxílio Acidente do INSS. Nosso especialista está pronto para analisar seu caso.</p>
+          </div>
+          <button class="btn-wa" id="wa-btn-result">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.554 4.118 1.528 5.845L0 24l6.335-1.524A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.977 0-3.818-.543-5.388-1.485l-.386-.229-4 .962.979-3.897-.252-.4A9.797 9.797 0 012.182 12C2.182 6.579 6.579 2.182 12 2.182c5.421 0 9.818 4.397 9.818 9.818 0 5.421-4.397 9.818-9.818 9.818z"/></svg>
+            Falar com Especialista Agora
+          </button>
+          <p class="quiz-disclaimer" style="margin-top:12px">Atendimento de segunda a sexta, das 8h às 18h. Respondemos também por mensagem fora desse horário.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     FAQ
+══════════════════════════════════════════════════════ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div style="text-align:center" class="reveal">
+      <div class="section-tag" style="justify-content:center"><div class="section-tag-line"></div><span>Dúvidas frequentes</span><div class="section-tag-line"></div></div>
+      <h2 class="section-title">Perguntas que<br>nossos clientes fazem</h2>
+    </div>
+    <div class="faq-grid">
+
+      <div class="faq-item reveal" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          Qual a diferença entre Auxílio Acidente e Auxílio Doença?
+          <span class="faq-chevron">+</span>
+        </div>
+        <div class="faq-answer">O Auxílio Doença é temporário — pago enquanto você está incapacitado. O Auxílio Acidente é permanente e vitalício — pago mensalmente mesmo depois que você voltou ao trabalho, como compensação pela sequela que ficou. Os dois podem ser acumulados.</div>
+      </div>
+
+      <div class="faq-item reveal" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          Meu acidente foi há anos. Ainda tenho direito?
+          <span class="faq-chevron">+</span>
+        </div>
+        <div class="faq-answer">Sim, em muitos casos sim. Existe um prazo de decadência de 10 anos a partir do acidente, mas a análise de cada caso pode identificar possibilidades de requerimento mesmo em situações mais antigas. Recomendamos verificar o quanto antes para não perder o prazo.</div>
+      </div>
+
+      <div class="faq-item reveal" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          Preciso de laudo médico para iniciar o processo?
+          <span class="faq-chevron">+</span>
+        </div>
+        <div class="faq-answer">Não necessariamente para a análise inicial. Nossa equipe orienta sobre todos os documentos necessários após a avaliação gratuita. Em muitos casos conseguimos reunir as evidências necessárias com a documentação que você já possui.</div>
+      </div>
+
+      <div class="faq-item reveal" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          Quanto tempo demora para aprovação do benefício?
+          <span class="faq-chevron">+</span>
+        </div>
+        <div class="faq-answer">O prazo varia de acordo com a complexidade do caso e a carga de processos do INSS na sua região. Em média, processos bem documentados têm aprovação entre 60 e 180 dias. Nossa equipe acompanha ativamente cada etapa para acelerar ao máximo.</div>
+      </div>
+
+      <div class="faq-item reveal" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          Quanto vocês cobram pelos serviços?
+          <span class="faq-chevron">+</span>
+        </div>
+        <div class="faq-answer">A análise inicial é completamente gratuita. Nossos honorários são cobrados apenas em caso de sucesso — um percentual sobre os valores recebidos, acordado previamente e de forma transparente. Se não ganhar, não paga absolutamente nada.</div>
+      </div>
+
+      <div class="faq-item reveal" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          Posso requerer mesmo tendo saído da empresa?
+          <span class="faq-chavron">+</span>
+          <span class="faq-chevron">+</span>
+        </div>
+        <div class="faq-answer">Sim. O direito ao Auxílio Acidente não está vinculado ao emprego atual — ele decorre do acidente ocorrido durante o vínculo CLT. Mesmo que você esteja desempregado ou em novo emprego, o direito permanece desde que dentro do prazo legal.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CTA FINAL
+══════════════════════════════════════════════════════ -->
+<section class="cta-banner">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title" style="text-align:center">Você pode ter direito a<br><em>muito mais do que imagina.</em></h2>
+      <p>Análise gratuita e sem compromisso. Nosso especialista responde em até 72 horas. Sem risco — se não ganhar, não paga.</p>
+      <div class="cta-actions">
+        <a href="#quiz" class="btn-primary">✓ &nbsp;Verificar meu Direito Agora</a>
+      </div>
+      <p class="tagline-final">"Com a Nexo — é certo!"</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:4px">
+          <svg width="34" height="34" viewBox="0 0 48 48" fill="none">
+            <defs>
+              <clipPath id="ft"><rect x="0" y="0" width="48" height="24"/></clipPath>
+              <clipPath id="fb"><rect x="0" y="24" width="48" height="24"/></clipPath>
+            </defs>
+            <polygon points="24,4 41,14 41,34 24,44 7,34 7,14" fill="none" stroke="#c9a84c" stroke-width="2.2" stroke-linejoin="round"/>
+            <ellipse cx="17" cy="24" rx="9" ry="5" fill="none" stroke="#c9a84c" stroke-width="1.9" clip-path="url(#fb)"/>
+            <ellipse cx="31" cy="24" rx="9" ry="5" fill="none" stroke="#c9a84c" stroke-width="1.9"/>
+            <ellipse cx="17" cy="24" rx="9" ry="5" fill="none" stroke="#c9a84c" stroke-width="1.9" clip-path="url(#ft)"/>
+          </svg>
+          <div>
+            <span class="logo-nexo">NEXO</span>
+            <span class="logo-sub">Assessoria Jurídica</span>
+          </div>
+        </div>
+        <p class="brand-tagline">Especialistas em direito previdenciário. Recuperando o que é seu por direito com transparência e resultado.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Serviços</h4>
+        <a href="#servicos">Auxílio Acidente INSS</a>
+        <a href="#servicos">Aposentadoria por Invalidez</a>
+        <a href="#servicos">Auxílio Doença</a>
+        <a href="#servicos">Revisão de Benefício</a>
+        <a href="#servicos">BPC / LOAS</a>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <a href="#casos">Casos de Sucesso</a>
+        <a href="#como">Como Funciona</a>
+        <a href="#faq">Dúvidas Frequentes</a>
+        <a href="#quiz">Análise Gratuita</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Nexo Assessoria Jurídica. Todos os direitos reservados.</p>
+      <span class="footer-tagline">"Com a Nexo — é certo!"</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════
+     BOTÃO WHATSAPP FLUTUANTE
+══════════════════════════════════════════════════════ -->
+<button class="wa-btn" id="wa-float" onclick="openWADirect()" title="Falar no WhatsApp">
+  <div class="wa-pulse"></div>
+  <svg viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.554 4.118 1.528 5.845L0 24l6.335-1.524A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.977 0-3.818-.543-5.388-1.485l-.386-.229-4 .962.979-3.897-.252-.4A9.797 9.797 0 012.182 12C2.182 6.579 6.579 2.182 12 2.182c5.421 0 9.818 4.397 9.818 9.818 0 5.421-4.397 9.818-9.818 9.818z"/>
+  </svg>
+</button>
+
+<!-- ══════════════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════════════ -->
+<script>
+// ── CONFIGURAÇÃO ─────────────────────────────────────────────────────
+const WA_NUMBER = '5511961707191';
+
+// ── NAVBAR SCROLL ────────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── MENU MOBILE ──────────────────────────────────────────────────────
+function toggleMenu() {
+  const links = document.querySelector('.nav-links');
+  links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+  links.style.flexDirection = 'column';
+  links.style.position = 'absolute';
+  links.style.top = '70px';
+  links.style.left = '0';
+  links.style.right = '0';
+  links.style.background = 'rgba(8,15,26,.98)';
+  links.style.padding = '24px 40px';
+  links.style.gap = '20px';
+  links.style.borderBottom = '1px solid rgba(201,168,76,.15)';
+}
+
+// ── CHECKBOXES ───────────────────────────────────────────────────────
+const checkState = { c1:false, c2:false, c3:false, c4:false, r1:false, r2:false, r3:false, r4:false };
+function toggleCheck(id) {
+  checkState[id] = !checkState[id];
+  const item = document.getElementById(id);
+  const box  = document.getElementById('cb-' + id) || document.getElementById('cb' + id.replace('c',''));
+  if(item) item.classList.toggle('checked', checkState[id]);
+  if(box)  box.textContent = checkState[id] ? '✓' : '';
+}
+
+// ── MÁSCARA DE TELEFONE ──────────────────────────────────────────────
+document.getElementById('input-tel').addEventListener('input', function() {
+  let v = this.value.replace(/\D/g,'').slice(0,11);
+  if (v.length >= 11)      v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+  else if (v.length >= 7)  v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+  else if (v.length >= 3)  v = `(${v.slice(0,2)}) ${v.slice(2)}`;
+  this.value = v;
+});
+
+// ── SUBMIT ───────────────────────────────────────────────────────────
+function handleSubmit() {
+  const nome   = document.getElementById('input-nome').value.trim();
+  const tel    = document.getElementById('input-tel').value.trim();
+  const parte  = document.getElementById('input-parte').value;
+  const funcao = document.getElementById('input-funcao').value.trim();
+  if (!nome)  { alert('Por favor, informe seu nome completo.'); return; }
+  if (!tel || tel.replace(/\D/g,'').length < 10) { alert('Por favor, informe um WhatsApp válido.'); return; }
+
+  const checks = [
+    'Trabalhou CLT: '          + (checkState.c1 ? 'Sim' : 'Nao'),
+    'Acidente de trabalho: '   + (checkState.c2 ? 'Sim' : 'Nao'),
+    'Sequela permanente: '     + (checkState.c3 ? 'Sim' : 'Nao certeza'),
+    'Ja tentou beneficio: '    + (checkState.c4 ? 'Nunca tentou dar entrada' : 'Ja tentou antes'),
+  ];
+
+  const registros = [
+    checkState.r1 && 'CAT (Comunicado de Acidente de Trabalho)',
+    checkState.r2 && 'Atestado médico / prontuário',
+    checkState.r3 && 'Boletim de Ocorrência (BO)',
+    checkState.r4 && 'Não tenho nenhum registro',
+  ].filter(Boolean);
+
+  const msg = encodeURIComponent(
+`Olá! Vim pelo site da Nexo Assessoria Jurídica e quero verificar meu direito ao Auxílio Acidente INSS.
+
+*Nome:* ${nome}
+*WhatsApp:* ${tel}
+
+*Situação:*
+${checks.join('\n')}
+
+*Parte do corpo afetada:* ${parte || 'Não informado'}
+*Função na empresa:* ${funcao || 'Não informado'}
+*Documentos / registros:* ${registros.length ? registros.join(', ') : 'Não informado'}
+
+Quero a análise gratuita do meu caso. Aguardo o contato de um especialista!`
+  );
+
+  // Mostrar resultado
+  document.getElementById('quiz-fields').style.display = 'none';
+  const result = document.getElementById('quiz-result');
+  result.style.display = 'block';
+  document.getElementById('wa-btn-result').onclick = () => {
+    window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
+  };
+  // Scroll para o resultado
+  result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// ── BOTÃO WA FLUTUANTE ───────────────────────────────────────────────
+function openWADirect() {
+  const msg = encodeURIComponent('Olá! Vim pelo site da Nexo e quero verificar se tenho direito ao Auxílio Acidente INSS.');
+  window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
+}
+
+// ── FAQ ──────────────────────────────────────────────────────────────
+function toggleFaq(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
+// ── REVEAL ON SCROLL ─────────────────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
