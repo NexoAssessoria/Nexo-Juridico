@@ -1124,6 +1124,11 @@
     #mainCard, #mainCard *, .step, .step *, .yn-btn, .q4-opt {
       opacity: 1 !important;
     }
+    /* Garantir que "Quem somos" sempre aparece */
+    .sobre-section .reveal {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
     /* Override nos estados selecionados */
     .yn-btn.selected-yes, .yn-btn.selected-no, .yn-btn.selected-no-green {
       opacity: 1 !important;
@@ -1352,7 +1357,7 @@
 
 <!-- ══ HEADER ══ -->
 <header>
-  <div class="logo-wrap">
+  <a href="https://www.nexojuridico.com.br/" class="logo-wrap" style="text-decoration:none;cursor:pointer" title="Voltar ao site">
     <!-- SVG Logo Nexo -->
     <svg class="logo-svg" viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M50 3 L95 28 L95 87 L50 112 L5 87 L5 28 Z"
@@ -1365,7 +1370,7 @@
       <div class="nexo">NEXO</div>
       <div class="sub">Assessoria Jurídica</div>
     </div>
-  </div>
+  </a>
   <div class="header-badge">
     <span class="dot"></span>
     Análise gratuita disponível
@@ -1400,9 +1405,9 @@
   <!-- PROGRESS -->
   <div class="progress-wrap" id="progressWrap">
     <div class="progress-labels">
-      <span class="p-label active" id="lbl1">Elegibilidade</span>
-      <span class="p-label" id="lbl2">Seu caso</span>
-      <span class="p-label" id="lbl3">Contato</span>
+      <span class="p-label active" id="lbl1">Contato</span>
+      <span class="p-label" id="lbl2">Elegibilidade</span>
+      <span class="p-label" id="lbl3">Seu caso</span>
     </div>
     <div class="progress-bar-bg">
       <div class="progress-bar-fill" id="progressFill" style="width:33%"></div>
@@ -1414,6 +1419,52 @@
     <!-- ══════ STEP 1 ══════ -->
     <div class="step active" id="step1">
       <div class="step-eyebrow">Etapa 1 de 3</div>
+      <div class="step-title">Seus dados de contato</div>
+      <div class="step-sub">Preencha seus dados para começarmos sua análise gratuita e sem compromisso.</div>
+
+      <div class="field-group">
+        <label class="field-label">Nome completo</label>
+        <div class="input-icon-wrap">
+          <span class="icon">👤</span>
+          <input type="text" id="nome" placeholder="Seu nome completo" oninput="checkContactStep()" />
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">WhatsApp (com DDD)</label>
+        <div class="input-icon-wrap">
+          <span class="icon">📱</span>
+          <input type="tel" id="whatsapp" placeholder="(11) 99999-9999" oninput="maskPhone(this); checkContactStep();" maxlength="15" />
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Melhor horário para contato</label>
+        <select id="horario">
+          <option value="">Selecione...</option>
+          <option value="manha">Manhã (8h – 12h)</option>
+          <option value="tarde">Tarde (12h – 18h)</option>
+          <option value="qualquer">Qualquer horário</option>
+          <option value="mensagem">Prefiro por mensagem</option>
+        </select>
+      </div>
+
+      <button class="btn-primary" id="btnContactStep" onclick="goContactToEligibility()" disabled>
+        Continuar →
+      </button>
+
+      <div class="micro-trust">
+        <div class="micro-trust-item"><span class="dot-g">✓</span> 100% gratuito</div>
+        <div class="micro-trust-item"><span class="dot-gold">🔒</span> LGPD — dados protegidos</div>
+        <div class="micro-trust-item"><span class="dot-g">⚡</span> Retorno em 30min</div>
+        <div class="micro-trust-item"><span class="dot-gold">⚖</span> Só paga se ganhar</div>
+      </div>
+    </div>
+
+    <!-- ══════ STEP 2 ══════ -->
+    <div class="step" id="step2">
+      <button class="btn-back" onclick="goStep(1)">← Voltar</button>
+      <div class="step-eyebrow">Etapa 2 de 3</div>
       <div class="step-title">Verificação de elegibilidade</div>
       <div class="step-sub">Responda com sinceridade — leva menos de 1 minuto.</div>
 
@@ -1448,11 +1499,11 @@
 
       <!-- Q4 -->
       <div class="field-group">
-        <div class="yn-q">4. Já solicitou o Auxílio Acidente no INSS antes?</div>
+        <div class="yn-q">4. Você ficou afastado pelo INSS após o acidente?</div>
         <div class="q4-list">
-          <button class="q4-opt" id="q4_nunca"  onclick="setQ4('nunca')">Nunca solicitei</button>
-          <button class="q4-opt" id="q4_negado" onclick="setQ4('negado')">Solicitei e fui negado</button>
-          <button class="q4-opt" id="q4_recebo" onclick="setQ4('recebo')">Já recebo o benefício</button>
+          <button class="q4-opt" id="q4_nunca"  onclick="setQ4('nunca')">✅ Sim, fiquei afastado</button>
+          <button class="q4-opt" id="q4_negado" onclick="setQ4('negado')">❌ Não fiquei afastado</button>
+          <button class="q4-opt" id="q4_recebo" onclick="setQ4('recebo')">❓ Não sei / Não lembro</button>
         </div>
       </div>
 
@@ -1461,19 +1512,12 @@
       <button class="btn-primary" id="btnStep1" onclick="goStep2()" disabled>
         Continuar →
       </button>
-
-      <div class="micro-trust">
-        <div class="micro-trust-item"><span class="dot-g">✓</span> 100% gratuito</div>
-        <div class="micro-trust-item"><span class="dot-gold">🔒</span> LGPD — dados protegidos</div>
-        <div class="micro-trust-item"><span class="dot-g">⚡</span> Retorno em 30min</div>
-        <div class="micro-trust-item"><span class="dot-gold">⚖</span> Só paga se ganhar</div>
-      </div>
     </div>
 
-    <!-- ══════ STEP 2 ══════ -->
-    <div class="step" id="step2">
-      <button class="btn-back" onclick="goStep(1)">← Voltar</button>
-      <div class="step-eyebrow">Etapa 2 de 3</div>
+    <!-- ══════ STEP 3 ══════ -->
+    <div class="step" id="step3">
+      <button class="btn-back" onclick="goStep(2)">← Voltar</button>
+      <div class="step-eyebrow">Etapa 3 de 3</div>
       <div class="step-title">Detalhes do seu caso</div>
       <div class="step-sub">Quanto mais soubermos, melhor será nossa análise.</div>
 
@@ -1561,55 +1605,11 @@
         <textarea id="obs" placeholder="Descreva brevemente o acidente ou qualquer detalhe relevante..."></textarea>
       </div>
 
-      <button class="btn-primary" onclick="goStep3()">Continuar →</button>
+      <button class="btn-primary" id="btnEnviar" onclick="enviar()">🔍&nbsp; Enviar para análise gratuita</button>
+      <p style="text-align:center;font-size:.72rem;color:var(--sub);margin-top:14px;font-weight:300;line-height:1.6">Ao enviar, você concorda em receber contato via WhatsApp.<br/>Seus dados são confidenciais e protegidos pela LGPD.</p>
     </div>
 
-    <!-- ══════ STEP 3 ══════ -->
-    <div class="step" id="step3">
-      <button class="btn-back" onclick="goStep(2)">← Voltar</button>
-      <div class="step-eyebrow">Etapa 3 de 3</div>
-      <div class="step-title">Seus dados de contato</div>
-      <div class="step-sub">Um especialista entrará em contato em até 30min com a análise completa do seu caso.</div>
 
-      <div class="alert alert-success show">
-        ✅ Com base nas suas respostas, você tem <strong>alto potencial</strong> de ter direito ao Auxílio Acidente!
-      </div>
-
-      <div class="field-group">
-        <label class="field-label">Nome completo</label>
-        <div class="input-icon-wrap">
-          <span class="icon">👤</span>
-          <input type="text" id="nome" placeholder="Seu nome completo" />
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label">WhatsApp (com DDD)</label>
-        <div class="input-icon-wrap">
-          <span class="icon">📱</span>
-          <input type="tel" id="whatsapp" placeholder="(11) 99999-9999" oninput="maskPhone(this)" maxlength="15" />
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label">Melhor horário para contato</label>
-        <select id="horario">
-          <option value="">Selecione...</option>
-          <option value="manha">Manhã (8h – 12h)</option>
-          <option value="tarde">Tarde (12h – 18h)</option>
-          <option value="qualquer">Qualquer horário</option>
-          <option value="mensagem">Prefiro por mensagem</option>
-        </select>
-      </div>
-
-      <button class="btn-primary" id="btnEnviar" onclick="enviar()">
-        🔍&nbsp; Enviar para análise gratuita
-      </button>
-
-      <p style="text-align:center;font-size:.72rem;color:var(--sub);margin-top:14px;font-weight:300;line-height:1.6">
-        Ao enviar, você concorda em receber contato via WhatsApp.<br/>Seus dados são confidenciais e protegidos pela LGPD.
-      </p>
-    </div>
 
   </div><!-- /card -->
 
@@ -1865,24 +1865,15 @@
 
   /* ══ HEADER SCROLL + WHATSAPP FLUTUANTE ══ */
   const wppFloat = document.getElementById('wppFloat');
-  const fotoTrigger = document.querySelector('.sobre-foto-wrap');
 
   window.addEventListener('scroll', () => {
     document.querySelector('header').classList.toggle('scrolled', window.scrollY > 40);
-
-    // Exibe o botão flutuante ao passar da foto do escritório
-    if (wppFloat && fotoTrigger) {
-      const fotoBottom = fotoTrigger.getBoundingClientRect().bottom;
-      if (fotoBottom < 0) {
-        wppFloat.classList.add('show');
-      } else {
-        wppFloat.classList.remove('show');
-      }
-    } else if (wppFloat) {
-      // fallback: aparece após 400px de scroll
-      wppFloat.classList.toggle('show', window.scrollY > 400);
-    }
+    // Exibe o botão flutuante após qualquer scroll
+    if (wppFloat) wppFloat.classList.toggle('show', window.scrollY > 80);
   });
+
+  // Garante que aparece se a página já estiver rolada
+  if (wppFloat && window.scrollY > 80) wppFloat.classList.add('show');
 
   /* ══ SCROLL REVEAL ══ */
   const revealObs = new IntersectionObserver((entries) => {
@@ -1914,7 +1905,7 @@
     document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
     document.getElementById('step1').classList.add('active');
     updateProgress(1);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('mainCard')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function setYN(q, val) {
@@ -1937,18 +1928,37 @@
     checkStep1();
   }
 
+  function checkContactStep() {
+    const nome = document.getElementById('nome')?.value.trim() || '';
+    const wpp  = document.getElementById('whatsapp')?.value.trim() || '';
+    const btn  = document.getElementById('btnContactStep');
+    if (btn) btn.disabled = !(nome.length >= 3 && wpp.length >= 14);
+  }
+
+  function goContactToEligibility() {
+    const nome = document.getElementById('nome')?.value.trim() || '';
+    const wpp  = document.getElementById('whatsapp')?.value.trim() || '';
+    if (!nome || nome.length < 3) { alert('Por favor, informe seu nome completo.'); return; }
+    if (wpp.length < 14) { alert('Por favor, informe um WhatsApp válido com DDD.'); return; }
+    // Envia contato para planilha imediatamente ao avançar do Step 1
+    const horario = document.getElementById('horario')?.value || '';
+    enviarParaPlanilha({
+      nome,
+      whatsapp: wpp,
+      horario,
+      q1: '', q2: '', q3: '', q4: '',
+      quando: '', parte_corpo: '', funcao: '', emprego: '',
+      documentos: '', obs: ''
+    });
+    goStep(2);
+  }
+
   function checkStep1() {
     const all = state.q1 && state.q2 && state.q3 && state.q4;
     const btn = document.getElementById('btnStep1');
     if (btn) btn.disabled = !all;
-    if (all && state.q4 === 'recebo') {
-      const a = document.getElementById('alertStep1');
-      a.textContent = '⚠️ Você já recebe o benefício. Podemos verificar se o valor está correto ou se há revisão cabível.';
-      a.className = 'alert alert-warning show';
-    } else {
-      const a = document.getElementById('alertStep1');
-      if (a) a.className = 'alert';
-    }
+    const a = document.getElementById('alertStep1');
+    if (a) a.className = 'alert';
   }
 
   function goStep(n) {
@@ -1956,7 +1966,7 @@
     const target = document.getElementById('step' + n);
     if (target) target.classList.add('active');
     updateProgress(n);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('mainCard')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function goStep2() {
@@ -1964,7 +1974,7 @@
       showIneligivel('Sem vínculo CLT e sem acidente de trabalho registrado, o Auxílio Acidente pode não se aplicar. Mas podemos verificar outros benefícios disponíveis para você.');
       return;
     }
-    goStep(2);
+    goStep(3);
   }
 
 
@@ -1978,7 +1988,7 @@
     const q1t = state.q1 === 'sim' ? '✅ Tinha CLT' : '❌ Sem CLT';
     const q2t = state.q2 === 'sim' ? '✅ Acidente de trabalho/trajeto' : '⚠️ Fora do ambiente de trabalho';
     const q3t = state.q3 === 'sim' ? '✅ Tem sequela permanente' : '⚠️ Sem sequela confirmada';
-    const q4m = { nunca:'❌ Nunca solicitou', negado:'⚠️ Foi negado', recebo:'✅ Já recebe' };
+    const q4m = { nunca:'✅ Sim, ficou afastado', negado:'❌ Não ficou afastado', recebo:'❓ Não sabe / Não lembra' };
     const msg = [
       `Olá! Fiz a triagem no site da Nexo e tenho interesse em analisar meu caso.`,
       ``,
@@ -2011,7 +2021,7 @@
     if (e.target === this) fecharModal();
   });
 
-  function goStep3() { goStep(3); abrirModal(); }
+  function goStep3() { goStep(3); } /* legacy - not used */
 
   function updateProgress(step) {
     const pcts = { 1:'33%', 2:'66%', 3:'100%' };
@@ -2056,7 +2066,7 @@
     const m = document.getElementById('ineligivelMsg');
     if (m) m.textContent = msg;
     document.getElementById('ineligivel').classList.add('show');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('mainCard')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function enviar() {
@@ -2074,9 +2084,9 @@
     const q2t = state.q2 === 'sim' ? '✅ Sim — acidente de trabalho/trajeto' : '⚠️ Doença profissional';
     const q3t = state.q3 === 'sim' ? '✅ Sim — tem sequela permanente' : '⚠️ Sem sequela confirmada';
     const q4m = {
-      nunca:  '❌ Nunca requereu o benefício',
-      negado: '⚠️ Solicitou e foi negado pelo INSS',
-      recebo: '✅ Já recebe (possível revisão de valor)'
+      nunca:  '✅ Sim, ficou afastado pelo INSS',
+      negado: '❌ Não ficou afastado',
+      recebo: '❓ Não sabe / Não lembra'
     };
 
     // ── Detalhes (Step 2) ──
@@ -2112,7 +2122,7 @@
       `1️⃣ CLT na época do acidente: ${q1t}`,
       `2️⃣ Tipo de acidente: ${q2t}`,
       `3️⃣ Sequela permanente: ${q3t}`,
-      `4️⃣ Histórico do benefício: ${q4m[state.q4] || 'Não informado'}`,
+      `4️⃣ Ficou afastado pelo INSS: ${q4m[state.q4] || 'Não informado'}`,
       ``,
       `*📄 DETALHES DO CASO:*`,
       `🗓️ Quando ocorreu: ${quando}`,
@@ -2149,7 +2159,8 @@
     document.getElementById('progressWrap').style.display = 'none';
     document.getElementById('mainCard').style.display = 'none';
     document.getElementById('success').classList.add('show');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('mainCard')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    abrirModal();
   }
 
   /* STATS COUNTERS */
