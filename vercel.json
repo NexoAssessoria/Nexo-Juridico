@@ -1,5 +1,6 @@
 {
-    "rewrites": [
-          { "source": "/", "destination": "/Nexo - Site Completo.html" }
-    ]
+        "rewrites": [
+                    { "source": "/", "destination": "/index.html" },
+                    { "source": "/afiliados", "destination": "/afiliados.html" }
+        ]
 }
