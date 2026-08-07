@@ -1890,7 +1890,7 @@
       <p style="color:var(--sub);font-size:.88rem;font-weight:300;margin-bottom:22px" id="ineligivelMsg">
         Com base nas suas respostas, o caso exige uma análise mais aprofundada. Entre em contato direto com nossa equipe.
       </p>
-      <a href="https://wa.me/5511961707191?text=Olá!%20Quero%20analisar%20meu%20caso%20com%20a%20Nexo." class="btn-whatsapp" target="_blank" onclick="try{fbq('track','Contact',{content_name:'lp_whatsapp_direto'})}catch(e){}">
+      <a href="https://wa.me/5511961707191?text=Olá!%20Quero%20analisar%20meu%20caso%20com%20a%20Nexo." class="btn-whatsapp" target="_blank">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.135.558 4.14 1.535 5.878L.057 23.99l6.305-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.889 9.889 0 0 1-5.031-1.375l-.361-.214-3.741.981.997-3.648-.235-.374A9.86 9.86 0 0 1 2.106 12C2.106 6.58 6.58 2.106 12 2.106S21.894 6.58 21.894 12 17.42 21.894 12 21.894z"/></svg>
         Falar com um especialista
       </a>
@@ -1949,8 +1949,7 @@
   <div class="wpp-float-tooltip">Falar com especialista</div>
   <a class="wpp-float-btn"
      href="https://wa.me/5511961707191?text=Olá!%20Vim%20através%20do%20site%20e%20quero%20falar%20com%20a%20Nexo%20Assessoria%20Jurídica."
-     target="_blank" rel="noopener" aria-label="WhatsApp"
-     onclick="try{fbq('track','Contact',{content_name:'lp_whatsapp_direto'})}catch(e){}">
+     target="_blank" rel="noopener" aria-label="WhatsApp">
     <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.135.558 4.14 1.535 5.878L.057 23.99l6.305-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.889 9.889 0 0 1-5.031-1.375l-.361-.214-3.741.981.997-3.648-.235-.374A9.86 9.86 0 0 1 2.106 12C2.106 6.58 6.58 2.106 12 2.106S21.894 6.58 21.894 12 17.42 21.894 12 21.894z"/></svg>
   </a>
 </div>
@@ -2327,14 +2326,6 @@
     const link = document.getElementById('whatsappLink');
     if (link) link.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 
-    // ── Meta Pixel: Contact (LP · formulário) ──
-    try {
-      var tel = (wpp || '').replace(/\D/g, '');
-      fbq('track', 'Contact',
-        { content_name: 'lp_formulario' },
-        { eventID: 'ct_' + tel });
-    } catch (e) {}
-
     // ── Enviar para Google Sheets ──
     enviarParaPlanilha({
       nome,
@@ -2434,6 +2425,47 @@
   document.querySelectorAll('.sobre-card,.sobre-lead,.sobre-header,.sobre-foto-wrap,.sobre-missao,.micro-trust-item,.footer-gov')
     .forEach(el => { el.classList.add('reveal'); revealObs2.observe(el); });
 
+</script>
+
+<!-- Meta Pixel · evento Contact (clique para o WhatsApp) -->
+<script>
+(function () {
+  // Telefone digitado na triagem, normalizado para 55DDDNUMERO
+  function telNormalizado() {
+    var el = document.getElementById('whatsapp');
+    var d = el && el.value ? el.value.replace(/\D/g, '') : '';
+    if (!d) return '';
+    if (d.indexOf('55') !== 0) d = '55' + d;
+    return d;
+  }
+
+  var jaEnviado = {}; // evita disparo repetido no mesmo carregamento
+
+  function dispararContact(origem) {
+    if (typeof fbq !== 'function') return;
+    var tel = telNormalizado();
+    var eventID = 'ct_' + (tel || 'anon') + '_' + origem;
+    if (jaEnviado[eventID]) return;
+    jaEnviado[eventID] = true;
+    fbq('track', 'Contact', { content_name: origem }, { eventID: eventID });
+  }
+
+  // Captura qualquer clique que leve ao WhatsApp, em qualquer um dos caminhos
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (t && t.nodeType === 3) t = t.parentNode;   // clique em nó de texto
+    if (!t || !t.closest) return;
+    var a = t.closest('a[href*="wa.me"]');
+    if (!a) return;
+
+    var origem = a.id === 'whatsappLink' ? 'triagem_completa'
+               : a.id === 'modalWppLink' ? 'modal_triagem'
+               : a.closest('#wppFloat')  ? 'botao_flutuante'
+               : 'link_direto';
+
+    dispararContact(origem);
+  }, true); // fase de captura: dispara antes da navegação
+})();
 </script>
 </body>
 </html>
