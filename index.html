@@ -2573,5 +2573,11 @@
   }, true); // fase de captura: dispara antes da navegação
 })();
 </script>
+
+<!-- Repassa fbclid/utm da home para a /triagem, para não depender só do cookie _fbc -->
+<script>
+  document.querySelectorAll('a[href^="/triagem"]')
+    .forEach(function (a) { a.href = '/triagem' + location.search; });
+</script>
 </body>
 </html>

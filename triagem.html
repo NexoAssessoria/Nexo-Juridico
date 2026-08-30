@@ -1698,6 +1698,16 @@
         </div>
       </div>
 
+      <div class="field-group">
+        <label class="field-label">Melhor horário para contato</label>
+        <select id="horario">
+          <option value="qualquer">Qualquer horário</option>
+          <option value="manha">Manhã (8h-12h)</option>
+          <option value="tarde">Tarde (12h-18h)</option>
+          <option value="mensagem">Prefiro por mensagem</option>
+        </select>
+      </div>
+
       <button class="btn-primary" id="btnContactStep" onclick="goContactToEligibility()" disabled>
         Continuar →
       </button>
@@ -1985,11 +1995,25 @@
 
 <script>
   const WHATSAPP_NUMBER = '5511961707191';
-  // ── Após publicar o Apps Script, cole a URL aqui ──
-  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxtdrKYGr-ZDPyjnTONSadhFRdRH1CG4P6mXFgzFpVn-TPJbhQxAwp1qq4J2qDWGuiNuQ/exec';
+  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzd7uFnZmpUznnqC9pruOGr'
+    + '5eifVVnK9MVYb8WhPtCJ84N5MaprghCUaN9xNB7E8HE/exec';
+
+  // Identificador único do lead nesta sessão — liga a gravação parcial (saída da Etapa 1)
+  // à gravação completa (envio final), para diferenciar as duas linhas na planilha.
+  const LEAD_ID = 'lp_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+
+  function cookie(n) {
+    const m = document.cookie
+      .match('(^|;)\\s*' + n + '\\s*=\\s*([^;]+)');
+    return m ? m.pop() : '';
+  }
 
   function enviarParaPlanilha(dados) {
     if (!SHEETS_URL || SHEETS_URL === 'COLE_AQUI_A_URL_DO_APPS_SCRIPT') return;
+    dados.fbclid = new URLSearchParams(location.search)
+                    .get('fbclid') || '';
+    dados.fbc    = cookie('_fbc');
+    dados.fbp    = cookie('_fbp');
     // Image beacon — funciona em qualquer contexto sem CORS
     const params = new URLSearchParams();
     Object.keys(dados).forEach(k => params.append(k, dados[k] || ''));
@@ -2130,6 +2154,8 @@
     // Envia contato para planilha imediatamente ao avançar do Step 1
     const horario = document.getElementById('horario')?.value || '';
     enviarParaPlanilha({
+      lead_id: LEAD_ID,
+      status: 'parcial',
       nome,
       whatsapp: wpp,
       horario,
@@ -2328,6 +2354,8 @@
 
     // ── Enviar para Google Sheets ──
     enviarParaPlanilha({
+      lead_id: LEAD_ID,
+      status: 'completo',
       nome,
       whatsapp: wpp,
       horario,
