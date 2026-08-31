@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Termos de Uso e Política de Privacidade | Nexo Assessoria Jurídica</title>
+  <meta name="description" content="Termos de Uso e Política de Privacidade (LGPD) da Nexo Assessoria Jurídica — como coletamos, usamos e protegemos seus dados." />
+  <meta name="robots" content="noindex, follow" />
+  <meta name="theme-color" content="#0E1A2B" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:       #A88A4C;
+      --gold-light: #BFA36D;
+      --gold-bg:    rgba(168,138,76,.08);
+      --gold-border:rgba(168,138,76,.22);
+      --navy:       #0E1A2B;
+      --navy-mid:   #132236;
+      --navy-card:  #17263C;
+      --navy-card2: #1C2E47;
+      --indigo:     #3D4469;
+      --indigo-bg:  rgba(61,68,105,.18);
+      --border:     rgba(87,102,140,.35);
+      --text:       #F2F4F7;
+      --sub:        #8fa3bf;
+      --green:      #4C8C6A;
+      --green-bg:   rgba(76,140,106,.09);
+      --red:        #B15F58;
+      --red-bg:     rgba(177,95,88,.09);
+      --radius:     8px;
+    }
+
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      background: var(--navy);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.65;
+      overflow-x: hidden;
+      width: 100%;
+    }
+    img, svg, canvas { max-width: 100%; }
+    a { color: var(--gold-light); }
+
+    /* ── HEADER (mesmo padrão do site) ── */
+    header {
+      background: var(--navy-mid);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: nowrap;
+      position: relative;
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 14px; min-width: 0; flex-shrink: 1; }
+    .logo-svg { width: 42px; height: 42px; flex-shrink: 0; }
+    .logo-divider { width: 1px; height: 36px; background: var(--gold); opacity: .45; flex-shrink: 0; }
+    .logo-text { min-width: 0; }
+    .logo-text .nexo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+      letter-spacing: .5px;
+      white-space: nowrap;
+    }
+    .logo-text .sub {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: .58rem;
+      letter-spacing: 3.5px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-top: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+    .voltar-link {
+      font-size: .78rem;
+      font-weight: 500;
+      color: var(--sub);
+      text-decoration: none;
+      white-space: nowrap;
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: var(--radius);
+      transition: border-color .2s, color .2s;
+    }
+    .voltar-link:hover { border-color: var(--gold); color: var(--gold-light); }
+
+    /* ── CONTEÚDO ── */
+    .legal-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+    .legal-eyebrow {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .legal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .legal-updated {
+      font-size: .8rem;
+      color: var(--sub);
+      margin-bottom: 8px;
+    }
+    .gold-line {
+      width: 56px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin: 18px 0 30px;
+    }
+    .legal-toc {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      margin-bottom: 40px;
+      font-size: .85rem;
+    }
+    .legal-toc div { font-weight: 700; color: var(--text); margin-bottom: 10px; font-size: .78rem; letter-spacing: .5px; text-transform: uppercase; color: var(--gold); }
+    .legal-toc ol { padding-left: 20px; color: var(--sub); }
+    .legal-toc li { margin-bottom: 6px; }
+    .legal-toc a { color: var(--sub); text-decoration: none; }
+    .legal-toc a:hover { color: var(--gold-light); }
+
+    section.legal-section { margin-bottom: 38px; }
+    .legal-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      padding-top: 6px;
+      border-top: 1px solid var(--border);
+      padding-top: 22px;
+    }
+    .legal-section h3 {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      margin: 18px 0 8px;
+    }
+    .legal-section p { font-size: .9rem; color: var(--text); opacity: .92; margin-bottom: 12px; }
+    .legal-section ul, .legal-section ol.legal-list { padding-left: 20px; margin-bottom: 12px; }
+    .legal-section li { font-size: .9rem; color: var(--text); opacity: .92; margin-bottom: 6px; }
+    .legal-section strong { color: var(--gold-light); font-weight: 600; }
+
+    .legal-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 18px;
+      font-size: .82rem;
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .legal-table th, .legal-table td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .legal-table th { color: var(--gold); font-weight: 700; background: var(--navy-card2); font-size: .72rem; letter-spacing: .3px; text-transform: uppercase; }
+    .legal-table tr:last-child td { border-bottom: none; }
+
+    .legal-card {
+      background: var(--gold-bg);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      margin-bottom: 14px;
+    }
+    .legal-card p { margin-bottom: 0; font-size: .87rem; }
+
+    .contato-box {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      margin-top: 8px;
+    }
+    .contato-box p { margin-bottom: 6px; font-size: .88rem; }
+    .contato-box strong { color: var(--gold-light); }
+
+    /* ── FOOTER (mesmo padrão do site) ── */
+    footer {
+      text-align: center;
+      padding: 40px 20px 32px;
+      border-top: 1px solid var(--border);
+      color: var(--sub);
+      font-size: .78rem;
+      line-height: 1.8;
+    }
+    .footer-logo { display: flex; justify-content: center; margin-bottom: 14px; }
+
+    @media (max-width: 480px) {
+      header { padding: 12px 16px; }
+      .voltar-link { padding: 7px 10px; font-size: .72rem; }
+      .legal-title { font-size: 1.5rem; }
+      .legal-wrap { padding: 32px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="https://www.nexojuridico.com.br/" class="logo-wrap" style="text-decoration:none;cursor:pointer" title="Voltar ao site">
+    <svg class="logo-svg" viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 3 L95 28 L95 87 L50 112 L5 87 L5 28 Z"
+            stroke="#A88A4C" stroke-width="4" fill="none" stroke-linejoin="round"/>
+      <ellipse cx="38" cy="57" rx="22" ry="13" stroke="#A88A4C" stroke-width="4" fill="none"/>
+      <ellipse cx="62" cy="57" rx="22" ry="13" stroke="#A88A4C" stroke-width="4" fill="none"/>
+    </svg>
+    <div class="logo-divider"></div>
+    <div class="logo-text">
+      <div class="nexo">NEXO</div>
+      <div class="sub">Assessoria Jurídica</div>
+    </div>
+  </a>
+  <a href="/" class="voltar-link">← Voltar ao site</a>
+</header>
+
+<div class="legal-wrap">
+  <div class="legal-eyebrow">Documento legal</div>
+  <h1 class="legal-title">Termos de Uso e Política de Privacidade</h1>
+  <div class="legal-updated">Última atualização: 30 de agosto de 2026</div>
+  <div class="gold-line"></div>
+
+  <div class="legal-toc">
+    <div>Nesta página</div>
+    <ol>
+      <li><a href="#quem-somos">Quem somos</a></li>
+      <li><a href="#termos-de-uso">Termos de Uso</a></li>
+      <li><a href="#dados-coletados">Quais dados coletamos</a></li>
+      <li><a href="#como-usamos">Como e por que usamos seus dados</a></li>
+      <li><a href="#cookies-pixel">Cookies e Meta Pixel (Facebook/Instagram)</a></li>
+      <li><a href="#compartilhamento">Com quem compartilhamos seus dados</a></li>
+      <li><a href="#retencao">Por quanto tempo guardamos seus dados</a></li>
+      <li><a href="#seus-direitos">Seus direitos como titular (LGPD, art. 18)</a></li>
+      <li><a href="#seguranca">Segurança da informação</a></li>
+      <li><a href="#contato">Fale com a gente / Encarregado de Dados</a></li>
+      <li><a href="#alteracoes">Alterações desta política</a></li>
+    </ol>
+  </div>
+
+  <section class="legal-section" id="quem-somos">
+    <h2>1. Quem somos</h2>
+    <p>Este site (<strong>nexojuridico.com.br</strong>) é operado por <strong>Nexo Assessoria Jurídica</strong>, CNPJ <strong>59.670.327/0001-13</strong>, doravante "Nexo", "nós" ou "controladora dos dados", nos termos da Lei nº 13.709/2018 (Lei Geral de Proteção de Dados Pessoais — LGPD).</p>
+    <p>Este documento explica, em linguagem simples, como você pode usar nosso site e como tratamos os dados pessoais que você nos fornece ao preencher o formulário de triagem, ao clicar para falar conosco no WhatsApp, ou apenas ao navegar pelas páginas.</p>
+  </section>
+
+  <section class="legal-section" id="termos-de-uso">
+    <h2>2. Termos de Uso</h2>
+    <p>Ao acessar e usar este site, você concorda com as condições abaixo:</p>
+    <ul>
+      <li>O conteúdo deste site tem caráter <strong>informativo</strong> e não constitui aconselhamento jurídico individualizado. A análise sobre o seu direito a benefícios do INSS só é confirmada após avaliação do seu caso concreto por nossa equipe.</li>
+      <li>O formulário de triagem é gratuito e não gera qualquer cobrança. Honorários, quando aplicáveis, só existem em caso de êxito e mediante contrato específico, apresentado a você antes de qualquer cobrança.</li>
+      <li>Você se compromete a fornecer informações verdadeiras no formulário de triagem e no atendimento via WhatsApp.</li>
+      <li>É proibido utilizar este site para fins ilícitos, para tentar acessar áreas restritas sem autorização, ou para enviar conteúdo malicioso, ofensivo ou automatizado (bots, scraping) sem nossa autorização prévia.</li>
+      <li>Marcas, textos, layout e identidade visual deste site pertencem à Nexo Assessoria Jurídica e não podem ser reproduzidos sem autorização.</li>
+      <li>Podemos atualizar, suspender ou descontinuar funcionalidades do site a qualquer momento, sem aviso prévio, sem prejuízo dos atendimentos já em andamento.</li>
+    </ul>
+  </section>
+
+  <section class="legal-section" id="dados-coletados">
+    <h2>3. Quais dados coletamos</h2>
+    <p>Coletamos dados de duas formas: os que <strong>você nos informa diretamente</strong> e os que são <strong>gerados automaticamente</strong> pela sua navegação.</p>
+
+    <h3>3.1. Dados que você nos informa</h3>
+    <table class="legal-table">
+      <tr><th>Dado</th><th>Onde é coletado</th><th>Finalidade</th></tr>
+      <tr><td>Nome</td><td>Formulário de triagem</td><td>Identificar e retornar seu atendimento</td></tr>
+      <tr><td>Telefone/WhatsApp</td><td>Formulário de triagem</td><td>Entrar em contato sobre a análise do seu caso</td></tr>
+      <tr><td>Respostas sobre o acidente/afastamento (elegibilidade)</td><td>Formulário de triagem</td><td>Verificar se você preenche os requisitos do Auxílio Acidente</td></tr>
+      <tr><td>Melhor horário para contato</td><td>Formulário de triagem</td><td>Organizar a fila de retorno da nossa equipe</td></tr>
+    </table>
+
+    <h3>3.2. Dados coletados automaticamente</h3>
+    <table class="legal-table">
+      <tr><th>Dado</th><th>Origem</th><th>Finalidade</th></tr>
+      <tr><td>Endereço IP, tipo de navegador, idioma, fuso horário e dispositivo</td><td>Navegação no site</td><td>Segurança, funcionamento técnico e estatísticas de uso</td></tr>
+      <tr><td>Páginas visitadas, cliques e eventos de interação (ex.: clique no botão de WhatsApp)</td><td>Meta Pixel (Facebook/Instagram)</td><td>Medir a eficácia dos nossos anúncios e melhorar o site</td></tr>
+      <tr><td>Identificador de clique de anúncio (<em>fbclid</em>) e cookies <em>_fbc</em>/<em>_fbp</em></td><td>Meta Pixel</td><td>Associar sua visita ao anúncio que você clicou (atribuição de campanha)</td></tr>
+    </table>
+    <p>Não coletamos dados sensíveis (como dados de saúde detalhados) além do estritamente necessário para avaliar sua elegibilidade ao benefício, e essas informações são tratadas com confidencialidade.</p>
+  </section>
+
+  <section class="legal-section" id="como-usamos">
+    <h2>4. Como e por que usamos seus dados</h2>
+    <p>Tratamos seus dados pessoais com base nas seguintes hipóteses legais previstas na LGPD (art. 7º):</p>
+    <ul>
+      <li><strong>Execução de procedimentos preliminares e de contrato</strong> (art. 7º, V): para analisar seu caso e, se você optar, prestar o serviço jurídico contratado.</li>
+      <li><strong>Legítimo interesse</strong> (art. 7º, IX): para melhorar nosso site, medir a performance de campanhas publicitárias e evitar fraudes.</li>
+      <li><strong>Consentimento</strong> (art. 7º, I): quando aplicável, por exemplo, ao aceitar cookies de publicidade não essenciais.</li>
+    </ul>
+    <p>Usamos os dados para: (a) responder seu pedido de análise e entrar em contato pelo canal informado; (b) organizar internamente a fila de atendimento; (c) medir e otimizar nossos anúncios no Facebook/Instagram; (d) cumprir obrigações legais e regulatórias.</p>
+    <p>Não usamos seus dados para tomar decisões automatizadas que produzam efeitos jurídicos sobre você — toda análise de elegibilidade é revisada por uma pessoa da nossa equipe.</p>
+  </section>
+
+  <section class="legal-section" id="cookies-pixel">
+    <h2>5. Cookies e Meta Pixel (Facebook/Instagram)</h2>
+    <p>Utilizamos o <strong>Meta Pixel</strong>, tecnologia de rastreamento fornecida pela Meta Platforms, Inc. (e, quando aplicável, Meta Platforms Ireland Limited), para medir conversões e otimizar campanhas de anúncios no Facebook e Instagram.</p>
+    <div class="legal-card">
+      <p>O Meta Pixel coleta informações sobre sua visita a este site — como páginas visualizadas, ações realizadas (por exemplo, clicar para falar no WhatsApp ou concluir a triagem) e identificadores como os cookies <em>_fbp</em> e <em>_fbc</em> — e transmite essas informações à Meta. Se você estiver conectado ao Facebook no mesmo navegador, a Meta pode associar esse comportamento à sua conta.</p>
+    </div>
+    <p>A Meta utiliza esses dados para: medir a eficácia dos nossos anúncios; mostrar anúncios da Nexo a quem já visitou o site (remarketing); e, potencialmente, construir públicos semelhantes para novas campanhas. A Meta atua como <strong>controladora independente</strong> dos dados que recebe via Pixel, nos termos dos Termos de Processamento de Dados da Meta, e pode transferir esses dados para os Estados Unidos.</p>
+    <h3>Como desativar</h3>
+    <p>Você pode gerir suas preferências de anúncios diretamente na <a href="https://www.facebook.com/ads/preferences/" target="_blank" rel="noopener">Central de Preferências de Anúncios da Meta</a>, ou bloquear cookies de terceiros nas configurações do seu navegador. Bloquear esses cookies não impede o uso do site, mas pode reduzir a relevância dos anúncios que você vê.</p>
+  </section>
+
+  <section class="legal-section" id="compartilhamento">
+    <h2>6. Com quem compartilhamos seus dados</h2>
+    <p>Não vendemos seus dados pessoais. Compartilhamos dados apenas com:</p>
+    <ul>
+      <li><strong>Meta Platforms, Inc./Ireland Limited</strong> — via Meta Pixel, para fins de mensuração e otimização de anúncios (conforme item 5 acima).</li>
+      <li><strong>Prestadores de tecnologia</strong> que operam nossa infraestrutura (por exemplo, hospedagem do site na Vercel Inc. e planilha de gestão de leads via Google, através do Google Apps Script), sempre limitado ao necessário para o funcionamento do serviço.</li>
+      <li><strong>Autoridades públicas</strong>, quando exigido por lei, ordem judicial ou para exercício regular de direitos em processo administrativo ou judicial.</li>
+      <li><strong>Parceiros ou correspondentes jurídicos</strong>, apenas se você optar por seguir com a contratação do serviço, e sempre com o objetivo de viabilizar o seu atendimento.</li>
+    </ul>
+    <p>Alguns desses fornecedores podem processar dados fora do Brasil (transferência internacional). Nesses casos, buscamos garantir que o tratamento observe padrões de proteção compatíveis com a LGPD.</p>
+  </section>
+
+  <section class="legal-section" id="retencao">
+    <h2>7. Por quanto tempo guardamos seus dados</h2>
+    <p>Mantemos seus dados pelo tempo necessário para cumprir as finalidades descritas nesta política, observando os prazos legais de guarda de documentos jurídicos (que podem chegar a 5 ou mais anos, conforme prazos prescricionais aplicáveis) quando você contrata nossos serviços. Dados de leads que não avançam para contratação são mantidos por prazo razoável para fins de retorno e reativação de contato, podendo ser excluídos antes disso mediante sua solicitação.</p>
+  </section>
+
+  <section class="legal-section" id="seus-direitos">
+    <h2>8. Seus direitos como titular de dados (LGPD, art. 18)</h2>
+    <p>De acordo com o artigo 18 da LGPD, você tem direito a solicitar, a qualquer momento e mediante requisição simples:</p>
+    <ul>
+      <li>Confirmação da existência de tratamento dos seus dados;</li>
+      <li>Acesso aos seus dados pessoais;</li>
+      <li>Correção de dados incompletos, inexatos ou desatualizados;</li>
+      <li>Anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade com a lei;</li>
+      <li>Portabilidade dos dados a outro fornecedor de serviço;</li>
+      <li>Eliminação dos dados pessoais tratados com base no seu consentimento;</li>
+      <li>Informação sobre entidades públicas e privadas com as quais compartilhamos seus dados;</li>
+      <li>Informação sobre a possibilidade de não fornecer consentimento e sobre as consequências da negativa;</li>
+      <li>Revogação do consentimento, quando o tratamento for baseado nele.</li>
+    </ul>
+    <p>Para exercer qualquer um desses direitos, use o canal de contato indicado na seção 10.</p>
+  </section>
+
+  <section class="legal-section" id="seguranca">
+    <h2>9. Segurança da informação</h2>
+    <p>Adotamos medidas técnicas e administrativas razoáveis para proteger seus dados contra acessos não autorizados, perda, alteração ou vazamento, incluindo o uso de conexão segura (HTTPS) em todo o site e acesso restrito às informações coletadas. Nenhum sistema é 100% imune a incidentes; caso ocorra um incidente de segurança que possa acarretar risco a você, comunicaremos conforme exigido pela LGPD.</p>
+  </section>
+
+  <section class="legal-section" id="contato">
+    <h2>10. Fale com a gente / Encarregado de Dados</h2>
+    <p>Para dúvidas sobre esta política, solicitações relacionadas aos seus dados pessoais (art. 18 da LGPD) ou qualquer outro assunto relacionado à privacidade, entre em contato conosco:</p>
+    <div class="contato-box">
+      <p><strong>Nexo Assessoria Jurídica</strong></p>
+      <p>CNPJ: 59.670.327/0001-13</p>
+      <p>WhatsApp: <a href="https://wa.me/5511961707191" target="_blank" rel="noopener">(11) 96170-7191</a></p>
+      <p>Site: <a href="https://www.nexojuridico.com.br">nexojuridico.com.br</a></p>
+    </div>
+    <p style="margin-top:12px">Respondemos as solicitações relacionadas a dados pessoais dentro de prazo razoável, conforme previsto na LGPD.</p>
+  </section>
+
+  <section class="legal-section" id="alteracoes">
+    <h2>11. Alterações desta política</h2>
+    <p>Podemos atualizar este documento periodicamente para refletir mudanças em nossas práticas, em nossos fornecedores (como a Meta) ou na legislação aplicável. A data da última atualização está sempre indicada no topo desta página. Recomendamos revisitar este documento com regularidade.</p>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-logo">
+    <svg width="28" height="32" viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 3 L95 28 L95 87 L50 112 L5 87 L5 28 Z" stroke="#A88A4C" stroke-width="4" fill="none" stroke-linejoin="round"/>
+      <ellipse cx="38" cy="57" rx="22" ry="13" stroke="#A88A4C" stroke-width="4" fill="none"/>
+      <ellipse cx="62" cy="57" rx="22" ry="13" stroke="#A88A4C" stroke-width="4" fill="none"/>
+    </svg>
+  </div>
+  © 2026 Nexo Assessoria Jurídica · "Com a Nexo, é certo!"<br/>
+  CNPJ: 59.670.327/0001-13<br/>
+  <a href="https://www.nexojuridico.com.br">nexojuridico.com.br</a> · Dados protegidos pela LGPD
+</footer>
+
+</body>
+</html>
