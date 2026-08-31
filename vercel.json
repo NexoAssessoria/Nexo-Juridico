@@ -3,6 +3,7 @@
                     { "source": "/", "destination": "/index.html" },
                     { "source": "/triagem", "destination": "/triagem.html" },
                     { "source": "/afiliados", "destination": "/afiliados.html" },
-                    { "source": "/alex", "destination": "/alex.html" }
+                    { "source": "/alex", "destination": "/alex.html" },
+                    { "source": "/termos", "destination": "/termos.html" }
         ]
 }
